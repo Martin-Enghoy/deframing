@@ -158,7 +158,8 @@ int main(){
 					indexCount++;
 				}
 				payloadArr[m] = '\0';
-				printf("-%d", indexCount);
+				printf("\n%s",payloadArr);
+				printf("\n-%d", indexCount);
 				
 				/* 
 				 *
@@ -187,7 +188,8 @@ int main(){
 				}
 				*/
 				
-				int indexOfParityBits = indexCount+payloadSize*8;
+				int indexOfParityBits = indexCount;
+				printf("\n%d",indexOfParityBits);
 				char parityArr[45];
 				int parBitCounter = 0;
 				for(n=indexOfParityBits; n<(indexOfParityBits+payloadSize); n++){
@@ -195,6 +197,7 @@ int main(){
 					indexCount++;
 					parBitCounter++;
 				}
+				printf("\n%s",parityArr);
 				parityArr[parBitCounter] = '\0';
 				 			
 				/*

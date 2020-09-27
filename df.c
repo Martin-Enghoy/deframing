@@ -156,9 +156,10 @@ int main(){
 			int indexOfParityBits = indexCount+payLoad*8;
 			for (g = 0; g < grpCount; g++){
 				for(h = indexOfParityBits; h < (LClen - 8); h++){
-					concat(dframes[g],inputFromLC[h]);
-					//strcat(dframes[g],inputFromLC[h]);
+					//concat(dframes[g],inputFromLC[h]);
+					strcat(dframes[g],inputFromLC[h]);
 				}
+				dframes[g][h] = '\0';
 			}
 			 			
 			/* 

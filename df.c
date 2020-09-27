@@ -159,7 +159,7 @@ int main(){
 			printf("%d\n", indexOfParityBits);
 			for (g = 0; g < grpCount; g++){
 				
-				dframes[g][9] = inputFromLC[indexOfParityBits];
+				dframes[g][8] = inputFromLC[indexOfParityBits];
 				
 				//for(h = indexOfParityBits; h < (LClen - 8); h++){
 					//concat(dframes[g],inputFromLC[h]);
@@ -260,7 +260,7 @@ int *getPayloadSize(char payOne[], char payTwo[], int *payloadSize){
 	
 	printf("%s",buffer);
 	
-	return atoi(buffer);
+	return payloadSize = atoi(buffer);
 }
 
 

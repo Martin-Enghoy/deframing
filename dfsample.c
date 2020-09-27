@@ -110,7 +110,7 @@ int main(){
 			
 			//printf("\n%d",payloadSize);
 			
-			payLoad = getPayloadSize(firstHeader,secondHeader,payloadSize);
+			payloadSize = getPayloadSize(firstHeader,secondHeader,payloadSize);
 			
 			printf("\n%d", payLoad);
 			
@@ -122,17 +122,26 @@ int main(){
 			 *
 			 */
 			 
-			printf("%\n%d", payLoad*8);
+			printf("%\n%d", payloadSize*8);
 			 
 			int maxLC = 405; // Maximum size of entire payload + parity byte + bits.
 			int grpCount = 0; //init for number of groups in output payload
-			for(e = 24; e < (indexCount+payLoad*8); e+=8){
+			for(e = 24; e < (indexCount+payloadSize*8); e+=8){
 				for(f = 0; f < 8; f++){
 					dframes[grpCount][f] = inputFromLC[e+f];
 				}
 				grpCount++;
 			}
-			printf("\n~%d",grpCount);
+			printf("\n~%d\n",grpCount);
+		
+			for(k=0; k<grpCount; k++){
+				for(l=0; l<8; l++){
+				printf("%c", dframes[k][l]);
+				}
+				printf("\n");
+			}
+			printf("\n");
+			
 		
 			
 			/* 
@@ -142,14 +151,23 @@ int main(){
 			 *	Parity bits start after parity byte index.
 			 *	Parity bits will be concatenated into initial payload
 			 *
+			 *	
+			 *	Current tests have problems with concatenation.
 			 */
-
-			int indexOfParityBits = indexCount+payLoad*8;
+			
+			int indexOfParityBits = indexCount+payloadSize*8;
+			printf("%d\n", indexOfParityBits);
 			for (g = 0; g < grpCount; g++){
-				for(h = indexOfParityBits; h < (LClen - 8); h++){
-					concat(dframes[g],inputFromLC[h]);
+				
+				dframes[g][8] = inputFromLC[indexOfParityBits];
+				
+				//for(h = indexOfParityBits; h < (LClen - 8); h++){
+					//concat(dframes[g],inputFromLC[h]);
 					//strcat(dframes[g],inputFromLC[h]);
-				}
+					//dframes[g][9] = inputFromLC
+				//}
+				indexOfParityBits++;
+				dframes[g][9] = '\0';
 			}
 			 			
 			/* 
@@ -162,6 +180,7 @@ int main(){
 				for(j=0; j<9; j++){
 					printf("%c", dframes[i][j]);
 				}
+				printf("~");
 			}
 			
 			
@@ -241,7 +260,7 @@ int *getPayloadSize(char payOne[], char payTwo[], int *payloadSize){
 	
 	printf("%s",buffer);
 	
-	return atoi(buffer);
+	return payloadSize = atoi(buffer);
 }
 
 

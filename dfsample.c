@@ -250,7 +250,7 @@ int *getPayloadSize(char payOne[], char payTwo[], int *payloadSize){
 	bin = 128;
 	for (k=0; k<8; k++){
 		if(payTwo[k]=='1'){
-			sumTwo += bin;
+			sumTwo += bin;	
 		}
 		bin = bin/2;
 	}

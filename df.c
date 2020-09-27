@@ -142,8 +142,10 @@ int main(){
 			 *	Parity bits start after parity byte index.
 			 *	Parity bits will be concatenated into initial payload
 			 *
+			 *	
+			 *	Current tests have problems with concatenation.
 			 */
-
+			
 			int indexOfParityBits = indexCount+payLoad*8;
 			for (g = 0; g < grpCount; g++){
 				for(h = indexOfParityBits; h < (LClen - 8); h++){

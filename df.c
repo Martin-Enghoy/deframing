@@ -138,6 +138,7 @@ int main(){
 				for(l=0; l<8; l++){
 				printf("%c", dframes[k][l]);
 				}
+				printf("\n");
 			}
 			
 		

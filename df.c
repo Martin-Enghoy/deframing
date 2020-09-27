@@ -140,6 +140,7 @@ int main(){
 				}
 				printf("\n");
 			}
+			printf("\n");
 			
 		
 			
@@ -155,12 +156,18 @@ int main(){
 			 */
 			
 			int indexOfParityBits = indexCount+payLoad*8;
+			printf("%d\n", indexOfParityBits);
 			for (g = 0; g < grpCount; g++){
-				for(h = indexOfParityBits; h < (LClen - 8); h++){
+				
+				dframes[g][9] = inputFromLC[indexOfParityBits];
+				
+				//for(h = indexOfParityBits; h < (LClen - 8); h++){
 					//concat(dframes[g],inputFromLC[h]);
-					strcat(dframes[g],inputFromLC[h]);
-				}
-				dframes[g][h] = '\0';
+					//strcat(dframes[g],inputFromLC[h]);
+					//dframes[g][9] = inputFromLC
+				//}
+				indexOfParityBits++;
+				dframes[g][9] = '\0';
 			}
 			 			
 			/* 
@@ -173,6 +180,7 @@ int main(){
 				for(j=0; j<9; j++){
 					printf("%c", dframes[i][j]);
 				}
+				printf("~");
 			}
 			
 			

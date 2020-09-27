@@ -42,6 +42,7 @@ int main(){
 	int frameTotSize = 440; //437 total bits + 3;
 	int LClen = strlen(inputFromLC);
 	int groups = LClen / 405;
+	//printf("%d\n", groups);
 
 	char dframes[groups][frameTotSize];
 	int indexCount = 0;

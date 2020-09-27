@@ -42,10 +42,9 @@ int main(){
 	int frameTotSize = 440; //437 total bits + 3;
 	int LClen = strlen(inputFromLC);
 	int numOfFrames = LClen / 440;
-	if (numOfFrames == 0){
+	if (LClen%440 != 0){
 		numOfFrames++;
 	}
-	//printf("\n%d",groups);
 
 	char dframes[numOfFrames][frameTotSize];
 	int indexCount = 0;
@@ -203,20 +202,27 @@ int main(){
 				/*
 				 *
 				 *	Combining payloadArr and parityArr into 2d Array
-				 *	dframes[frame][iteration]
+				 *	dframes[frames][iteration]
 				 *	
 				 */
+				 printf("\n-%d", payload+payloadSize);
 				 char frameArr[405];
-				 int p = indexOfParityBits;
+				 int p = 0;
 				 int payloadCounter = 0;
-				 for(o = 0; o < indexCount; o++){
-				 	if(o%9==0){
+				 for(o = 0; o < payload+payloadSize; o++){
+				 	 if(o==0){
+				 	 	dframes[frames][o] = payloadArr[payloadCounter];
+				 	 	payloadCounter++;
+				 	 	printf("\n-%s",dframes[frames]);
+					  } else if(o%8==0){
 				 		dframes[frames][o] = parityArr[p];
-				 		o++;
 				 		p++;
+				 		printf("\n---%s",dframes[frames]);
+					 } else if (o%8!=0){
+						 dframes[frames][o] = payloadArr[payloadCounter];
+						 payloadCounter++;
 					 }
-					 dframes[frames][o] = payloadArr[payloadCounter];
-					 payloadCounter++;
+					 printf("\n--%s",dframes[frames]);
 				 }
 				 dframes[frames][o] = '\0';
 				 
@@ -226,7 +232,7 @@ int main(){
 				 *
 				 */
 				printf("\n~");
-				for(i=0; i<indexCount; i++){
+				for(i=0; i<payload+payloadSize; i++){
 					printf("%c", dframes[frames][i]);	
 				}	
 				printf("~\n");

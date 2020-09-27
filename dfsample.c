@@ -69,17 +69,17 @@ int main(){
 		char startByte[8], stopByte[8];
 		strncpy(startByte,&inputFromLC[startFrame],8);
 		startByte[8] = '\0';
-		printf("%s~",startByte);
+		//printf("%s~",startByte);
 		strncpy(stopByte,&inputFromLC[stopFrame],8);
 		stopByte[8] = '\0';
-		printf("%s",stopByte);
+		//printf("%s",stopByte);
 		if (!strcmp(startByte,"00000001")){
 			indexCount = 8;
 			//startByte == "00000001"
-			printf("\nI found the start byte.");
+			//printf("\nI found the start byte.");
 			if (!strcmp(stopByte,"00000100")){		
 				//stopByte == "00000100"
-				printf("\nI found the stop byte.\n");
+				//printf("\nI found the stop byte.\n");
 				/* 
 				 *
 				 *	Initialization of acquisition of header value
@@ -101,8 +101,8 @@ int main(){
 				}
 				firstHeader[c] = '\0';
 				//printf("-%d",count);
-				printf("%s\n",firstHeader);
-				printf("-%d\n",indexCount);
+				//printf("%s\n",firstHeader);
+				//printf("-%d\n",indexCount);
 				
 				char secondHeader[8]; //second number of payload size
 				for(d=0;d<8;d++){
@@ -116,11 +116,11 @@ int main(){
 				secondHeader[d]='\0';
 				//printf("-%d",count);
 				
-				printf("%s\n",secondHeader);
+				//printf("%s\n",secondHeader);
 				//int payLoad;
 				payloadSize = getPayloadSize(firstHeader,secondHeader,payloadSize);
-				printf("\n%d", payloadSize);
-				printf("\n-%d", indexCount);
+				//printf("\n%d", payloadSize);
+				//printf("\n-%d", indexCount);
 				/* 
 				 *
 				 *	Starting from first index of payload.
@@ -157,8 +157,8 @@ int main(){
 					indexCount++;
 				}
 				payloadArr[m] = '\0';
-				printf("\n%s",payloadArr);
-				printf("\n-%d", indexCount);
+				//printf("\n%s",payloadArr);
+				//printf("\n-%d", indexCount);
 				
 				/* 
 				 *
@@ -188,16 +188,18 @@ int main(){
 				*/
 				
 				int indexOfParityBits = indexCount;
-				printf("\n%d",indexOfParityBits);
+				//printf("\n%d",indexOfParityBits);
+				//printf("\n%d", indexOfParityBits+payloadSize);
 				char parityArr[45];
 				int parBitCounter = 0;
 				for(n=indexOfParityBits; n<(indexOfParityBits+payloadSize); n++){
 					parityArr[parBitCounter] = inputFromLC[n];
-					indexCount++;
+					//indexCount++;
 					parBitCounter++;
 				}
-				printf("\n%s",parityArr);
 				parityArr[parBitCounter] = '\0';
+				//printf("\n%s",parityArr);
+				
 				 			
 				/*
 				 *
@@ -205,24 +207,23 @@ int main(){
 				 *	dframes[frames][iteration]
 				 *	
 				 */
-				 printf("\n-%d", payload+payloadSize);
-				 char frameArr[405];
+				 //printf("\n-%d", payload+payloadSize);
 				 int p = 0;
 				 int payloadCounter = 0;
-				 for(o = 0; o < payload+payloadSize; o++){
-				 	 if(o==0){
-				 	 	dframes[frames][o] = payloadArr[payloadCounter];
+				 for(o = 1; o < payload+payloadSize+1; o++){
+				 	 if(o==1){
+				 	 	dframes[frames][o-1] = payloadArr[payloadCounter];
 				 	 	payloadCounter++;
-				 	 	printf("\n-%s",dframes[frames]);
-					  } else if(o%8==0){
-				 		dframes[frames][o] = parityArr[p];
+				 	 	//printf("\n-%s",dframes[frames]);
+					  } else if(o%9==0){
+				 		dframes[frames][o-1] = parityArr[p];
 				 		p++;
-				 		printf("\n---%s",dframes[frames]);
-					 } else if (o%8!=0){
-						 dframes[frames][o] = payloadArr[payloadCounter];
+				 		//printf("\n---%s",dframes[frames]);
+					 } else if (o%9!=0){
+						 dframes[frames][o-1] = payloadArr[payloadCounter];
 						 payloadCounter++;
+						 //printf("\n--%s",dframes[frames]);
 					 }
-					 printf("\n--%s",dframes[frames]);
 				 }
 				 dframes[frames][o] = '\0';
 				 
@@ -231,11 +232,11 @@ int main(){
 				 *	Outputting of 2D Array storing payload concatenated.
 				 *
 				 */
-				printf("\n~");
+				//printf("\n");
 				for(i=0; i<payload+payloadSize; i++){
 					printf("%c", dframes[frames][i]);	
 				}	
-				printf("~\n");
+				//printf("~\n");
 			}
 		}
 	}
@@ -312,7 +313,7 @@ int getPayloadSize(char payOne[], char payTwo[], int payloadSize){
 	buffer[1] = sumTwo;
 	buffer[2] = '\0';
 	
-	printf("%s",buffer);
+	//printf("%s",buffer);
 	
 	return payloadSize = atoi(buffer);
 }

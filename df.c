@@ -132,7 +132,14 @@ int main(){
 				}
 				grpCount++;
 			}
-			printf("\n~%d",grpCount);
+			printf("\n~%d\n",grpCount);
+		
+			for(k=0; k<grpCount; k++){
+				for(l=0; l<8; l++){
+				printf("%c", dframes[k][l]);
+				}
+			}
+			
 		
 			
 			/* 
